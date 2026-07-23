@@ -1,6 +1,5 @@
 
-> database@1.0.0 test D:\Xcelsz\build_me_version2\database
-> echo "Error: no test specified" && exit 1
+> @build-me/database@0.0.0 test D:\Xcelsz\build_me_version2\database
+> echo "no tests yet" && exit 0
 
-"Error: no test specified" 
- ELIFECYCLE  Test failed. See above for more details.
+"no tests yet" 
