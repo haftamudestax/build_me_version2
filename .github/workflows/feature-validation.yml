@@ -18,6 +18,7 @@ jobs:
     name: Lint, Type Check, Test & Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -40,6 +41,46 @@ jobs:
       - name: Lint
         run: pnpm turbo run lint
 
+      #################################################################
+      # Debug TypeCheck
+      #################################################################
+
+      - name: Debug - Git Information
+        run: |
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          git log --oneline -1
+
+      - name: Debug - Working Directory
+        run: |
+          pwd
+          ls -la
+
+      - name: Debug - Turbo Version
+        run: pnpm turbo --version
+
+      - name: Debug - Node & PNPM
+        run: |
+          node --version
+          pnpm --version
+
+      - name: Debug - turbo.json
+        run: cat turbo.json
+
+      - name: Debug - Root package.json
+        run: cat package.json
+
+      - name: Debug - Search for typecheck in turbo.json
+        run: grep -n "typecheck" turbo.json || true
+
+      - name: Debug - Workspace Packages
+        run: pnpm turbo ls
+
+      - name: Debug - Root Scripts
+        run: pnpm run
+
+      #################################################################
+
       - name: Type Check
         run: pnpm turbo run typecheck
 
@@ -53,6 +94,7 @@ jobs:
     name: Dependency Security Audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -76,6 +118,7 @@ jobs:
     name: CodeQL Static Analysis
     runs-on: ubuntu-latest
     timeout-minutes: 15
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
