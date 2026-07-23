@@ -1,0 +1,20 @@
+{
+  "name": "build-me-version2",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:generate": "pnpm --filter @build-me/database db:generate",
+    "db:migrate": "pnpm --filter @build-me/database db:migrate"
+  },
+  "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "turbo": "^2.10.5"
+  }
+}
