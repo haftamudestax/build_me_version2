@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: About Me API
+  description: REST API for the personal brand website (public site + admin dashboard).
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000
+    description: Local development
+  - url: https://about-me-api-black.vercel.app
+    description: Production
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Used by CI, uptime monitoring, and integration tests.
+      operationId: getHealth
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  /contact:
+    post:
+      summary: Submit a contact form message
+      description: >
+        Not yet implemented — planned endpoint. Accepts a contact-form
+        submission from the public site and writes it to the
+        contact_messages table via Drizzle.
+      operationId: createContactMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactMessageInput"
+      responses:
+        "201":
+          description: Message created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactMessageCreated"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    get:
+      summary: List contact messages (admin only)
+      description: >
+        Not yet implemented — planned endpoint. Requires authentication.
+      operationId: listContactMessages
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of contact messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContactMessage"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+      required: [status]
+
+    ContactMessageInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        email:
+          type: string
+          format: email
+          example: jane@example.com
+        message:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          example: Hello!
+      required: [name, email, message]
+
+    ContactMessageCreated:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, createdAt]
+
+    ContactMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, name, email, message, createdAt]
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
