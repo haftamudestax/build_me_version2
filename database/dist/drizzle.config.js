@@ -7,6 +7,8 @@ exports.default = (0, drizzle_kit_1.defineConfig)({
     out: "./migrations",
     dialect: "postgresql",
     dbCredentials: {
-        url: process.env.VITE_DATABASE_URL,
+        url: process.env.DATABASE_URL,
     },
+    verbose: true,
+    strict: true,
 });
