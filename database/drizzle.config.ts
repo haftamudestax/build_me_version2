@@ -3,9 +3,11 @@ import "dotenv/config";
 
 export default defineConfig({
   schema: "./drizzle/schema.ts",
-  out: "./migrations",
+  out: "./migrations",  
   dialect: "postgresql",
   dbCredentials: {
-    url: process.env.VITE_DATABASE_URL!,
+    url: process.env.DATABASE_URL!,
   },
+  verbose: true,
+  strict: true,
 });
