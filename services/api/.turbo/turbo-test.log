@@ -5,10 +5,10 @@
 
 [1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90mD:/Xcelsz/build_me_version2/services/api[39m
 
- [32m✓[39m src/app.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m src/app.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 21[2mms[22m[39m
 
 [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
 [2m      Tests [22m [1m[32m1 passed[39m[22m[90m (1)[39m
-[2m   Start at [22m 12:40:54
-[2m   Duration [22m 425ms[2m (transform 28ms, setup 0ms, import 242ms, tests 15ms, environment 0ms)[22m
+[2m   Start at [22m 00:25:14
+[2m   Duration [22m 1.01s[2m (transform 56ms, setup 0ms, import 821ms, tests 21ms, environment 0ms)[22m
 
