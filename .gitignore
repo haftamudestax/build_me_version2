@@ -7,8 +7,10 @@ node_modules/
 # Other files and folders
 .settings/
 .env
+.turbo/
 .turbo
 .vercel
+ dist 
 
 # Executables
 *.swf
