@@ -1,0 +1,5 @@
+$kind: collection
+description: Contract test collection generated from services/api/openapi.yaml. Requests use {{baseUrl}} so the same collection runs against local, staging, and production via different environment files.
+variables:
+  baseUrl: http://localhost:4000
+  authToken: ""

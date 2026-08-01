@@ -218,6 +218,15 @@ importers:
         specifier: ^8.62.1
         version: 8.65.0(eslint@10.7.0(jiti@2.7.0))(typescript@6.0.3)
 
+  packages/contract:
+    devDependencies:
+      newman:
+        specifier: ^6.2.1
+        version: 6.2.2
+      start-server-and-test:
+        specifier: ^3.0.11
+        version: 3.0.11
+
   services/api:
     dependencies:
       express:
@@ -254,15 +263,6 @@ importers:
       vitest:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@26.1.1)(@vitest/browser-playwright@4.1.10)(@vitest/coverage-v8@4.1.10)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1))
-
-  tests/contract:
-    devDependencies:
-      newman:
-        specifier: ^6.2.1
-        version: 6.2.2
-      start-server-and-test:
-        specifier: ^3.0.11
-        version: 3.0.11
 
   tests/e2e:
     devDependencies:
