@@ -5,5 +5,3 @@ ON fun_facts
 FOR SELECT
 TO anon
 USING (true);
-
--- No INSERT/UPDATE/DELETE policy for anon = writes stay blocked
