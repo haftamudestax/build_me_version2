@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{baseUrl}}/contact"
+url: "{{baseUrl}}/api/events"
 method: POST
 headers:
   Content-Type: application/json
@@ -7,9 +7,8 @@ body:
   type: text
   content: |-
     {
-      "name": "Jane Doe",
-      "email": "jane@example.com",
-      "message": "Hello! This is a contract test."
+      "eventType": "page_view",
+      "target": "/"
     }
 scripts:
   - type: afterResponse
@@ -18,7 +17,7 @@ scripts:
         pm.response.to.have.status(201);
       });
 
-      pm.test('Response matches ContactMessageCreated schema', function () {
+      pm.test('Response matches EventCreated schema', function () {
         const body = pm.response.json();
         pm.expect(body).to.have.property('id');
         pm.expect(body).to.have.property('createdAt');

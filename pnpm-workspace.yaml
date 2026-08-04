@@ -4,3 +4,4 @@ packages:
   - "packages/*"
   - "database"
   - "tests/*"
+  - "docs/postman"
