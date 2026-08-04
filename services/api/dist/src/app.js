@@ -12,4 +12,13 @@ app.get("/", (req, res) => {
 app.get("/health", (_req, res) => {
     res.json({ status: "ok" });
 });
+app.get("/api/bookings", async (req, res) => {
+    res.json({ message: "Bookings API endpoint is working" });
+});
+app.get("/api/events", async (req, res) => {
+    res.json({ message: "Events API endpoint is working" });
+});
+app.get("/api/leads", async (req, res) => {
+    res.json({ message: "Leads API endpoint is working" });
+});
 exports.default = app;

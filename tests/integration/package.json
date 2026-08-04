@@ -6,7 +6,10 @@
     "test:integration": "start-server-and-test \"pnpm --filter @about-me/api dev\" http://localhost:4000/health \"vitest run\""
   },
   "devDependencies": {
-    "vitest": "^4.1.10",
-    "start-server-and-test": "^2.0.4"
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "jest": "^30.4.2",
+    "start-server-and-test": "^2.0.4",
+    "vitest": "^4.1.10"
   }
 }
