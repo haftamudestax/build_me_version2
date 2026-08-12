@@ -22,3 +22,4 @@ node_modules/
 # information for Eclipse / Flash Builder.
 .vercel
 .env*
+.env.*
