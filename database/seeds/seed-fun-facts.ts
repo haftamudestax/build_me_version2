@@ -14,7 +14,7 @@ const facts = [
 ];
 
 async function seed() {
-  await db.delete(funFacts); 
+  await db.delete(funFacts);
   await db.insert(funFacts).values(facts);
   console.log("Seeded 4 fun facts.");
   await pool.end();
