@@ -103,3 +103,11 @@ jobs:
           fi
 
           echo "✅ No auth tokens found in committed .npmrc files."
+
+      # TruffleHog secret scanning
+      - name: Scan repository for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.pull_request.base.sha || github.event.before }}
+          head: ${{ github.event.pull_request.head.sha || github.sha }}
