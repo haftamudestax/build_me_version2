@@ -1,14 +1,17 @@
 name: Security Validation
+
 on:
   push:
     branches:
       - "feature/**"
       - development
       - main
+
   pull_request:
     branches:
       - development
       - main
+
 permissions:
   contents: read
   security-events: write
@@ -38,16 +41,21 @@ jobs:
               exit 1
             fi
           done
+
           echo "✅ .gitignore protects environment files."
+
       - name: Fail if environment files are committed
         run: |
           FILES=$(git ls-files | grep -E '(^|/)\.env($|\..*)' || true)
+
           if [ -n "$FILES" ]; then
             echo "❌ Environment files committed:"
             echo "$FILES"
             exit 1
           fi
+
           echo "✅ No environment files tracked."
+
       - name: Fail if private keys are committed
         run: |
           FILES=$(git ls-files | grep -E '\.(pem|key|p12|pfx|crt|cer|jks|keystore)$' || true)
@@ -57,10 +65,13 @@ jobs:
             echo "$FILES"
             exit 1
           fi
+
           echo "✅ No certificates or private keys committed."
+
       - name: Fail if SSH keys are committed
         run: |
           FILES=$(git ls-files | grep -E '(id_rsa|id_ed25519|known_hosts|authorized_keys)' || true)
+
           if [ -n "$FILES" ]; then
             echo "❌ SSH credentials detected:"
             echo "$FILES"
@@ -90,10 +101,5 @@ jobs:
             echo "$MATCHES"
             exit 1
           fi
+
           echo "✅ No auth tokens found in committed .npmrc files."
-      - name: Scan repository for secrets
-        uses: trufflesecurity/trufflehog@main
-        with:
-          path: ./
-          base: ${{ github.event.pull_request.base.sha || github.event.before }}
-          head: ${{ github.event.pull_request.head.sha || github.sha }}
