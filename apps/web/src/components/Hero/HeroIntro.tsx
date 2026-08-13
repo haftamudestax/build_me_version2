@@ -21,7 +21,7 @@ export function HeroIntro() {
         className="mt-6! text-5xl! font-extrabold! leading-tight! text-slate-900!"
       >
         Build Better
-        <p>Digital Experiences</p>
+        <span className="block">Digital Experiences</span>
       </Typography>
 
       <Typography
