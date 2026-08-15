@@ -11,14 +11,14 @@ export function HeroIntro() {
     >
       <Typography
         component="span"
-        className="rounded-full! bg-sky-300! px-6! py-4! text-md! font-bold! uppercase! tracking-wide! text-emerald-400!"
+        className="rounded-full! bg-blue-900! px-6! py-3! text-md! font-bold! uppercase! tracking-wide! text-white!"
       >
         Technology Ownership
       </Typography>
 
       <Typography
         component="h1"
-        className="mt-6! text-5xl! font-extrabold! leading-tight! text-slate-900!"
+        className="mt-6! text-5xl! font-extrabold! leading-tight! text-black!"
       >
         Build Better
         <span className="block">Digital Experiences</span>
@@ -26,17 +26,18 @@ export function HeroIntro() {
 
       <Typography
         component="h2"
-        className="mt-4! text-2xl! font-bold! bg-linear-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
+        className="mt-4! text-2xl! font-bold! text-blue-900!"
       >
         Simple, fast, and beautiful platforms that win and get real results.
       </Typography>
+
       <Typography
         component="p"
-        className="mt-6! text-lg! font-bold leading-relaxed! text-slate-600!"
+        className="mt-6! text-lg! font-normal! leading-relaxed! text-black!"
       >
-        Must see Websties and apps that are easy to use, look great, and work
+        Must-see websites and apps that are easy to use, look great, and work
         fast. Get more customers with ease. No stress, no confusion. Just
-        simple, reliable solutions that helps you grow. as paragraph
+        simple, reliable solutions that help you grow.
       </Typography>
     </motion.div>
   );
