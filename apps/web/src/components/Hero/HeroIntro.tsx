@@ -26,13 +26,13 @@ export function HeroIntro() {
 
       <Typography
         component="h2"
-        className="mt-4! text-2xl! font-semibold! bg-linear-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
+        className="mt-4! text-2xl! font-bold! bg-linear-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
       >
         Simple, fast, and beautiful platforms that win and get real results.
       </Typography>
       <Typography
         component="p"
-        className="mt-6! text-lg! leading-relaxed! text-slate-600!"
+        className="mt-6! text-lg! font-bold leading-relaxed! text-slate-600!"
       >
         Must see Websties and apps that are easy to use, look great, and work
         fast. Get more customers with ease. No stress, no confusion. Just
