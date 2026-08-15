@@ -36,7 +36,7 @@ describe("HeroIntro", () => {
 
     expect(
       screen.getByText(
-        /Websties and apps that are easy to use, look great, and work fast/i,
+        /Must-see websites and apps that are easy to use, look great, and work fast/i,
       ),
     ).toBeInTheDocument();
   });
