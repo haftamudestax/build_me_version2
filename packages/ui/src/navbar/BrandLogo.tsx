@@ -42,7 +42,7 @@ export function BrandLogo({
             </span>
           )}
           {taglineLines?.length && (
-            <span className="flex flex-col h-12 items-start justify-center leading-none mb-2">
+            <span className="flex flex-col h-12 items-start justify-center leading-none mb-2 text-xs">
               {taglineLines.map((line, index) => (
                 <span key={index}>{line}</span>
               ))}
