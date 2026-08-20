@@ -1,0 +1,15 @@
+{
+  "extends": "@build-me/config/tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@build-me/ui": ["../../packages/ui/src/index.ts"],
+      "@build-me/ui/*": ["../../packages/ui/src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
