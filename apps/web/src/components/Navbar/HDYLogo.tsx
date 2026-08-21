@@ -1,8 +1,10 @@
+import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BrandLogo, HexBadge, trackNavigationEvent } from "@build-me/ui/navbar";
 
 const Y_GRADIENT_ID = "hdy-logo-y-gradient";
 
+/** The HDY-specific monogram + arrow, clipped inside the generic HexBadge. */
 function HdyMarkContent() {
   return (
     <>
@@ -14,6 +16,7 @@ function HdyMarkContent() {
   );
 }
 
+/** The corner bracket accents, drawn outside the hex clip. */
 function HdyMarkDecorations() {
   return (
     <>
@@ -35,6 +38,7 @@ function HdyMarkDecorations() {
   );
 }
 
+/** The "HD" + gradient "Y" wordmark lockup. */
 function HdyWordmark() {
   return (
     <>
@@ -70,13 +74,30 @@ export function HDYLogo() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  // Fire a logo_view event once per distinct route — the navbar is
+  // sticky/always-visible on render, so "mounted for this route" is an
+  // accurate proxy for "viewed" without needing an IntersectionObserver.
+  // The ref guards against React 18 StrictMode's dev-only double-invoke
+  // firing this twice for the same route.
+  const lastTrackedRouteRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (lastTrackedRouteRef.current === location.pathname) return;
+    lastTrackedRouteRef.current = location.pathname;
+
+    trackNavigationEvent({
+      sourceRoute: location.pathname,
+      destinationRoute: "/",
+      eventType: "logo_view",
+      navigationSuccess: true,
+    });
+  }, [location.pathname]);
+
   return (
     <BrandLogo
       as={Link}
       href="/"
       ariaLabel="Home"
       onLogoClick={(event) => {
-        // don't push a redundant history entry when already on Home.
         if (isHome) event.preventDefault();
 
         trackNavigationEvent({

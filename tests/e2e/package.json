@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "cypress": "^15.20.1",
-    "start-server-and-test": "^3.0.11"
+    "start-server-and-test": "^3.0.11",
+    "@playwright/test": "^1.61.1"
   }
 }

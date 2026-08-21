@@ -13,7 +13,13 @@ export type { MobileMenuProps } from "./MobileMenu";
 export { Navbar } from "./Navbar";
 export type { NavbarProps } from "./Navbar";
 
-export type { NavItem, RouterLinkComponent, RouterNavLinkComponent } from "./types";
+export type {
+  NavItem,
+  RouterLinkComponent,
+  RouterLinkProps,
+  RouterNavLinkComponent,
+  RouterNavLinkProps,
+} from "./types";
 
 export { trackNavigationEvent, configureNavAnalytics } from "./useNavAnalytics";
 export type { NavEventType, NavigationEventPayload } from "./useNavAnalytics";
