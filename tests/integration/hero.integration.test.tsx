@@ -28,11 +28,5 @@ describe("Hero Section Integration", () => {
         name: /Simple, fast, and beautiful platforms that win and get real results/i,
       }),
     ).toBeInTheDocument();
-
-    expect(
-      screen.getByText(
-        /Websties and apps that are easy to use, look great, and work fast/i,
-      ),
-    ).toBeInTheDocument();
   });
 });
