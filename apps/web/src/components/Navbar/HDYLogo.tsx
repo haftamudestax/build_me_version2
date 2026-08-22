@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BrandLogo, HexBadge, trackNavigationEvent } from "@build-me/ui/navbar";
 
-/** The HDY monogram + arrow, clipped inside the generic HexBadge. */
 function HdyMarkContent() {
   return (
     <>
@@ -14,7 +13,6 @@ function HdyMarkContent() {
   );
 }
 
-/** The corner bracket accents, drawn outside the hex clip. */
 function HdyMarkDecorations() {
   return (
     <>
@@ -38,10 +36,6 @@ function HdyMarkDecorations() {
 
 export function HDYLogo() {
   const location = useLocation();
-
-  // Fire a logo_view event once per distinct route/mount. Regression
-  // note: this was accidentally dropped during the "remove tagline"
-  // rewrite — restored here.
   const lastTrackedRouteRef = useRef<string | null>(null);
   useEffect(() => {
     if (lastTrackedRouteRef.current === location.pathname) return;
@@ -57,13 +51,11 @@ export function HDYLogo() {
 
   return (
     <BrandLogo
+      className="hover:bg-blue-500! focus:bg-blue-500!/10 active:bg-blue-500!/20 flex items-center gap-2 rounded-md px-2 py-1 text-blue-50 transition-colors duration-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-900 active:text-blue-100"
       as={Link}
       href="/"
       ariaLabel="Home"
       onLogoClick={(event) => {
-        // Full page reload/redirect to Home — not a client-side SPA
-        // scroll. Respect modifier keys / non-primary clicks so
-        // ctrl/cmd-click still opens "/" in a new tab natively via href.
         const isPlainLeftClick =
           event.button === 0 &&
           !event.metaKey &&
@@ -80,9 +72,6 @@ export function HDYLogo() {
 
         if (isPlainLeftClick) {
           event.preventDefault();
-          // trackNavigationEvent's fetch uses keepalive: true, so the
-          // request above survives this full navigation instead of being
-          // cancelled mid-flight.
           window.location.href = "/";
         }
       }}

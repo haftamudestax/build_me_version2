@@ -7,9 +7,6 @@ import {
 import type { NavItem } from "@build-me/ui/navbar";
 import { HDYLogo } from "./HDYLogo";
 
-// "Home" removed per feedback — the logo itself is the Home control.
-// Add section-anchor links here as the single-page site grows
-// (e.g. { label: "Projects", to: "#projects" }).
 const NAV_LINKS: NavItem[] = [];
 
 export function Navbar() {
