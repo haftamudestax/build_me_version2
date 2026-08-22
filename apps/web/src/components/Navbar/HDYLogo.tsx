@@ -51,6 +51,7 @@ export function HDYLogo() {
 
   return (
     <BrandLogo
+      className="hover:bg-blue-500! focus:bg-blue-500!/10 active:bg-blue-500!/20 flex items-center gap-2 rounded-md px-2 py-1 text-blue-50 transition-colors duration-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-900 active:text-blue-100"
       as={Link}
       href="/"
       ariaLabel="Home"
