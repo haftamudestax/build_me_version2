@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
@@ -45,33 +45,25 @@ function renderAtRoute(initialPath: string) {
 }
 
 function getLogoLink(): HTMLElement {
-  const candidates = screen.getAllByRole("link", { name: "Home" });
-  const logo = candidates.find(
-    (el) => el.getAttribute("aria-label") === "Home",
-  );
-  if (!logo) throw new Error("Logo link with aria-label='Home' not found");
-  return logo;
-}
-
-function getNavHomeLink(): HTMLElement {
-  const candidates = screen.getAllByRole("link", { name: "Home" });
-  const navLink = candidates.find(
-    (el) => el.getAttribute("aria-label") !== "Home",
-  );
-  if (!navLink) throw new Error("Nav 'Home' link (visible text) not found");
-  return navLink;
+  return screen.getByRole("link", { name: "Home" });
 }
 
 describe("Navbar integration (real router)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.stubGlobal("location", { ...window.location, href: "" });
   });
 
-  it("renders both the logo link and the Home nav link", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("renders the logo link and no separate Home nav link (removed per feedback)", () => {
     renderAtRoute("/");
 
     expect(getLogoLink()).toBeInTheDocument();
-    expect(getNavHomeLink()).toBeInTheDocument();
+
+    expect(screen.getAllByRole("link", { name: "Home" })).toHaveLength(1);
   });
 
   it("fires a logo_view analytics event on mount", () => {
@@ -79,17 +71,6 @@ describe("Navbar integration (real router)", () => {
     expect(trackNavigationEvent).toHaveBeenCalledWith(
       expect.objectContaining({ eventType: "logo_view", sourceRoute: "/" }),
     );
-  });
-
-  it("navigates from a non-Home route back to Home when the logo is clicked", async () => {
-    const user = userEvent.setup();
-    renderAtRoute("/test");
-
-    expect(screen.getByText("Test Page")).toBeInTheDocument();
-
-    await user.click(getLogoLink());
-
-    expect(screen.getByText("Home Page")).toBeInTheDocument();
   });
 
   it("fires a logo_click event with correct source/destination when clicked", async () => {
@@ -108,22 +89,21 @@ describe("Navbar integration (real router)", () => {
     );
   });
 
-  it("AC-06: clicking the logo while already on Home does not throw or break rendering", async () => {
+  it("sets window.location.href to '/' on a plain left click (full page reload, not SPA nav)", async () => {
+    const user = userEvent.setup();
+    renderAtRoute("/test");
+
+    await user.click(getLogoLink());
+
+    expect(window.location.href).toBe("/");
+  });
+
+  it("does not throw when clicking the logo while already on Home", async () => {
     const user = userEvent.setup();
     renderAtRoute("/");
 
     await user.click(getLogoLink());
 
-    // Still on Home, nothing broke.
-    expect(screen.getByText("Home Page")).toBeInTheDocument();
-  });
-
-  it("navigates when the nav 'Home' link itself is clicked from a non-Home route", async () => {
-    const user = userEvent.setup();
-    renderAtRoute("/test");
-
-    await user.click(getNavHomeLink());
-
-    expect(screen.getByText("Home Page")).toBeInTheDocument();
+    expect(window.location.href).toBe("/");
   });
 });
