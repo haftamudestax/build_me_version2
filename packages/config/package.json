@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./features": "./src/features.ts"
+    "./features": "./src/features.ts",
+    "./tsconfig.base.json": "./tsconfig.base.json"
   }
 }
